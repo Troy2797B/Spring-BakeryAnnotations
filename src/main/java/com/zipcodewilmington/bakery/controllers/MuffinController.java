@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping (value = "/muffin-controller")
+@RequestMapping (value = "/muffins")
 public class MuffinController {
     @Autowired
     private MuffinService service;
@@ -26,12 +26,12 @@ public class MuffinController {
         return new ResponseEntity<>(service.index(), HttpStatus.OK);
     }
 
-    @RequestMapping (method = RequestMethod.GET, value = "/id")
-    public ResponseEntity<Muffin> show(Long id) {
+    @RequestMapping (method = RequestMethod.GET, value = "/{id}")
+    public ResponseEntity<Muffin> show(@PathVariable Long id) {
         return new ResponseEntity<>(service.show(id), HttpStatus.OK);
     }
 
-    @RequestMapping (method = RequestMethod.POST, value = "/new")
+    @RequestMapping (method = RequestMethod.POST, value = "/")
     public ResponseEntity<Muffin> create(@RequestBody Muffin baker) {
         return new ResponseEntity<>(service.create(baker), HttpStatus.CREATED);
     }
